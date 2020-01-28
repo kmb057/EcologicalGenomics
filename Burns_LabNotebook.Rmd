@@ -31,6 +31,53 @@ chunk_output_type: console
      * [Entry 9: 2020-01-23, Thursday](#id-section9)
     * [Entry 10: 2020-01-24, Friday](#id-section10)
     * [Entry 11: 2020-01-27, Monday](#id-section11)
+    -variation across the genome
+      -statistally capture variation with statistics
+      -number of SNPs dependent on location in chromosome (LD)
+    -selection acts locally across chromosome
+      -find outliers
+    -demographic processes act globally
+      -mean and distribution
+      
+    -demographic history
+      -Ne: idealized Wright-Fisher population
+      -migration
+      -genetic populations (demes)
+        divergence times between
+      -bottleneck, expansion, splitting
+      -coalescent theory
+        -branch of population genetics
+        -probability that two sampled allele copies share a common ancestor
+          -probability that two haplotypes originated from the same genotype
+          
+      -coalescence speeds up with lower population size
+        -1/2Ne
+        -due to increased effects of genetic drift in smaller populations
+        -estimation migration through whether there are allele copies with much deeper coalescence
+          -allele copy originated far back in common ancestor but migrated
+            -common ancestor not present since population was unified
+            
+        -presence of mutation distinct from geneaology
+          -fuzzy image
+          
+        -almost all alleles are rare
+        -if population is growing, see a lot of rare mutations
+          -frequency of rare alleles is very high, frequency of common alleles is low
+            -rate at which mutations enter population is proportional to effective population size times mutation rate
+              -theta=Ne*u
+        -bottlenecked populations lose rare alleles and retain common alleles
+        
+      -effect of selection on allele frequencies depends on type
+        -focus here is positive selection
+      -pi=nucleotide diversity
+        -average pairwise differences
+          -sample two individuals: how many SNPs do they differ by in the chromosome?
+        -LD measures extent of correlation
+          -hitchhiking (not under seleciton themselves, just along for the ride with selected sites)
+      -selective sweep has same signature as population expansion
+      -Taj D very negative in case of selective sweep or population expansion
+        -to distinguish selection, have to pick out local signals
+
      * [Entry 12: 2020-01-28, Tuesday](#id-section12)
      * [Entry 13: 2020-01-29, Wednesday](#id-section13)
      * [Entry 14: 2020-01-30, Thursday](#id-section14)
