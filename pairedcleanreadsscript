@@ -1,0 +1,4 @@
+for file in XFS*cl.pd.fq
+do
+	fastqc ${file} -o ~/EcologicalGenomics/myresults/pairedcleanreads
+done
