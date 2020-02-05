@@ -1,4 +1,4 @@
-do
+
 #!/bin/bash
 
 #This script will run the read mapping using "bam"
