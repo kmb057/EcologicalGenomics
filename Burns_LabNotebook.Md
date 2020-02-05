@@ -284,6 +284,22 @@ variation across the genome
 
 Entry 12: 2020-01-28, Tuesday.
 Entry 13: 2020-01-29, Wednesday.
+
+URL: [what to hyperlink](URL)
+
+embed code: /// cd ~/mydata ///
+
+This is where the class data are `/data/project.data`
+
+Phred score (probability that reader misread the nucleotide on the flow cell (could still be the wrong base)): p=10^(-Q/10)
+e.g., p=10^(-38/10)=0.0038 -> a good score
+
+XFS
+run fastqc on trimmed sequences
+did it clean things up? did quality scores improve? especially at the beginning and end?
+just on cleaned, paired reads.
+
+look back at cd (ll) /data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/
 Entry 14: 2020-01-30, Thursday.
 Entry 15: 2020-01-31, Friday.
 Entry 16: 2020-02-03, Monday.
