@@ -16,3 +16,11 @@ input="/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}
 output="/data/project_data/RS_ExomeSeq/mapping"
 
 
+#Run mapping.sh
+source ./mapping.sh
+
+#Run the post-processing steps
+source ./process_bam.sh
+
+
+
