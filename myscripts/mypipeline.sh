@@ -13,17 +13,6 @@ mypop="XFS"
 input="/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}"
 
 #Directory to store the outputs on our mapping
-output="/data/project_data/RS_ExomeSeq/mapping
+output="/data/project_data/RS_ExomeSeq/mapping"
 
 
-#My population
-mypop="XFS_01"
-
-#Directory to our cleaned and paired reads
-input="/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}"
-
-#Run mapping.sh
-source ./mapping.sh
-
-#Run the post-processing steps
-source ./process_bam.sh
