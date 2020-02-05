@@ -1,41 +1,18 @@
->
-> do
->   reverse=${forward/_R1.cl.pd.fq/_R2.cl.pd.fq}
->   f=${forward/_R1.cl.pd.fq/}
->   name=`basename ${f}`
->   bwa mem -t 1 -M ${ref} ${forward} ${reverse} > ${output}/BWA/${name}.sam
-> done
->
-> ^C
-[kburns@pbio381 ~]$ for forward in ${input}*_R1.cl.pd.fq
->
-> do
->   reverse=${forward/_R1.cl.pd.fq/_R2.cl.pd.fq}
->   f=${forward/_R1.cl.pd.fq/}
->   name=`basename ${f}`
->   bwa mem -t 1 -M ${ref} ${forward} ${reverse} > ${output}/BWA/${name}.sam
-> done
--bash: /BWA/XFS_01.sam: No such file or directory
-[kburns@pbio381 ~]$ vim
 do
+#!/bin/bash
 
-  out=${f/.sam/}
-  sambamba-0.7.1-linux-static view -S --format=bam ${f} -o ${out}.bam
-  samtools sort ${out}.bam -o ${out}.sorted.bam
+#This script will run the read mapping using "bam"
 
-done
+ref="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
 
-#Now, let's remove the PCR duplicates
-for file in ${output}/BWA/${mypop}*.sorted.bam
+#Write a loop to map each individual within my population.
+
+for forward in ${input}*_R1.cl.pd.fq
 
 do
-  f=${file/.sorted.bam/}
-  sambamba-0.7.1-linux-static markdup -r -t 1 ${file} ${f}.sorted.rmdup
+  reverse=${forward/_R1.cl.pd.fq/_R2.cl.pd.fq}
+  f=${forward/_R1.cl.pd.fq/}
+  name=`basename ${f}`
+  bwa mem -t 1 -M ${ref} ${forward} ${reverse} > ${output}/BWA/${name}.sam
 done
 
-#Now, to finish we'll index our files
-for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
-
-do
-  samtools index ${file}
-done
