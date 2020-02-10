@@ -1,3 +1,5 @@
+for f in ${output}/BWA/${mypop}*.sam
+
 do
 
   out=${f/.sam/}
