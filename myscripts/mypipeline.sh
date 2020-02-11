@@ -17,7 +17,7 @@ output="/data/project_data/RS_ExomeSeq/mapping"
 
 
 #Run mapping.sh
-source ./mapping.sh
+#source ./mapping.sh
 
 #Run the post-processing steps
 source ./process_bam.sh
