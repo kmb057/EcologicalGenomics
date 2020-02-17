@@ -281,21 +281,147 @@ variation across the genome
       -selective sweep has same signature as population expansion
       -Taj D very negative in case of selective sweep or population expansion
         -to distinguish selection, have to pick out local signals
-
 Entry 12: 2020-01-28, Tuesday.
 Entry 13: 2020-01-29, Wednesday.
+
+URL: [what to hyperlink](URL)
+
+embed code: /// cd ~/mydata ///
+
+This is where the class data are `/data/project.data`
+
+Phred score (probability that reader misread the nucleotide on the flow cell (could still be the wrong base)): p=10^(-Q/10)
+e.g., p=10^(-38/10)=0.0038 -> a good score
+
+XFS
+run fastqc on trimmed sequences
+did it clean things up? did quality scores improve? especially at the beginning and end?
+just on cleaned, paired reads.
+
+look back at cd (ll) /data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/
+```
+#!/bin/bash
+
+cd ~/Ecological_Genomics/myresults
+
+#creating new dir to store results
+mkdir fastqc
+
+for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/XFS*fastq.gz
+
+do
+
+fastqc ${file} -o fastqc/
+
+done
+```
 Entry 14: 2020-01-30, Thursday.
 Entry 15: 2020-01-31, Friday.
 Entry 16: 2020-02-03, Monday.
 Entry 17: 2020-02-04, Tuesday.
 Entry 18: 2020-02-05, Wednesday.
+
+#!/bin/bash
+
+#This script will run the read mapping using "bam"
+
+ref="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+#Write a loop to map each individual within my population.
+
+for forward in ${input}*_R1.cl.pd.fq
+
+do
+  reverse=${forward/_R1.cl.pd.fq/_R2.cl.pd.fq}
+  f=${forward/_R1.cl.pd.fq/}
+  name=`basename ${f}`
+  bwa mem -t 1 -M ${ref} ${forward} ${reverse} > ${output}/BWA/${name}.sam
+done
+
+
+#!/bin/bash   
+ 
+cd /data/project_data/RS_ExomeSeq/fastq/edge_fastq  
+ 
+for R1 in XFS*R1_fastq.gz  
+
+do 
+ 
+	R2=${R1/_R1_fastq.gz/_R2_fastq.gz}
+	f=${R1/_R1_fastq.gz/}
+	name=`basename ${f}`
+
+	java -classpath /data/popgen/Trimmomatic-0.33/trimmomatic-0.33.jar org.usadellab.trimmomatic.TrimmomaticPE \
+        -threads 1 \
+        -phred33 \
+         "$R1" \
+         "$R2" \
+         /data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${name}_R1.cl.pd.fq \
+         /data/project_data/RS_ExomeSeq/fastq/edge_fastq/unpairedcleanreads/${name}_R1.cl.un.fq \
+         /data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${name}_R2.cl.pd.fq \
+         /data/project_data/RS_ExomeSeq/fastq/edge_fastq/unpairedcleanreads/${name}_R2.cl.un.fq \
+        ILLUMINACLIP:/data/popgen/Trimmomatic-0.33/adapters/TruSeq3-PE.fa:2:30:10 \
+        LEADING:20 \
+        TRAILING:20 \
+        SLIDINGWINDOW:6:20 \
+        MINLEN:35 
+ 
+done 
 Entry 19: 2020-02-06, Thursday.
 Entry 20: 2020-02-07, Friday.
 Entry 21: 2020-02-10, Monday.
 Entry 22: 2020-02-11, Tuesday.
 Entry 23: 2020-02-12, Wednesday.
-Entry 24: 2020-02-13, Thursday.
-Entry 25: 2020-02-14, Friday.
+#!/bin/bash
+
+#We'll use this wrapper to run our different scripts.
+
+#Path to my repo
+
+myrepo="/users/k/b/kburns/EcologicalGenomics/"
+
+#My population
+mypop="XFS"
+
+#Directory to our cleaned and paired reads
+input="/data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/${mypop}"
+
+#Directory to store the outputs on our mapping
+output="/data/project_data/RS_ExomeSeq/mapping"
+
+
+#Run mapping.sh
+#source ./mapping.sh
+
+#Run the post-processing steps
+source ./process_bam.sh
+
+
+#for f in ${output}/BWA/${mypop}*.sam
+
+#do
+
+#  out=${f/.sam/}
+ # sambamba-0.7.1-linux-static view -S --format=bam ${f} -o ${out}.bam
+  #samtools sort ${out}.bam -o ${out}.sorted.bam
+
+#done
+
+#Now, let's remove the PCR duplicates
+#for file in ${output}/BWA/${mypop}*.sorted.bam
+
+#do
+ # f=${file/.sorted.bam/}
+  #sambamba-0.7.1-linux-static markdup -r -t 1 ${file} ${f}.sorted.rmdup
+#done
+
+#Now, to finish we'll index our files
+for file in ${output}/BWA/${mypop}*.sorted.rmdup.bam
+
+do
+  samtools index ${file}
+done
+To account for low read scores, use genotype likelihood to account for uncertainty.
 Entry 26: 2020-02-17, Monday.
 Entry 27: 2020-02-18, Tuesday.
 Entry 28: 2020-02-19, Wednesday.
