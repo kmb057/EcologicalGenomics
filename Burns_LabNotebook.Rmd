@@ -537,6 +537,19 @@ head(div)
 Entry 29: 2020-02-20, Thursday.
 Entry 30: 2020-02-21, Friday.
 Entry 31: 2020-02-24, Monday.
+Transcriptomics!!
+Workflow
+-Careful experimental design
+	considering questions/hypotheses (broad or a priori)
+	factors (populations, treatments, tissue, sex)
+-Experiment
+	control environment (did an individual experience a really hot tide the previous day? is one well fed and going into reproduction?)
+	sample tissues and individuals
+	save your RNA quickly (flash freeze! it's highly labile)
+		refer to transcriptomics technical details (extract, prep, sequence)
+-process and analyze sequence data
+	check quality, clean, check quality (working with fastQ files)
+	map to reference and extract count data
 Entry 32: 2020-02-25, Tuesday.
 Entry 33: 2020-02-26, Wednesday.
 Entry 34: 2020-02-27, Thursday.
