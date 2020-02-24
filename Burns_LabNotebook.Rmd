@@ -558,6 +558,8 @@ Workflow
 				use to test for differences in expression
 					using ANOVA design, e.g.
 			looking at counts (proxy for expression magnitude): two conditions, multiple families (look at degree of 				expression (average across replicates) for a given gene)
+-integrate (with other data types (different genetic diversity statistics, SNPS, proteomics, environmental data))
+	functional enrichment, network analyses (all genes in regulatory network, with a particular function)
 Entry 32: 2020-02-25, Tuesday.
 Entry 33: 2020-02-26, Wednesday.
 Entry 34: 2020-02-27, Thursday.
