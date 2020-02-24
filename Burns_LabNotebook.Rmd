@@ -550,6 +550,14 @@ Workflow
 -process and analyze sequence data
 	check quality, clean, check quality (working with fastQ files)
 	map to reference and extract count data
+		looking at abundance (RNAseq only read one direction of polarity)
+	Normalize for variation among samples
+		if one happened to map very well, you'll have a ton of data
+		results in a really nice data matrix (count data matrix)
+			which population was it in, what tissue, etc.
+				use to test for differences in expression
+					using ANOVA design, e.g.
+			looking at counts (proxy for expression magnitude): two conditions, multiple families (look at degree of 				expression (average across replicates) for a given gene)
 Entry 32: 2020-02-25, Tuesday.
 Entry 33: 2020-02-26, Wednesday.
 Entry 34: 2020-02-27, Thursday.
