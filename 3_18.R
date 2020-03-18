@@ -248,10 +248,10 @@ d
 
 
 
-p <-ggplot(d, aes(x=climate, y=count, shape=climate, colour = treatment)) + 
+p <-ggplot(d, aes(x=treatment, y=count, shape=climate, colour = treatment)) + 
   theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
 p <- p + geom_point(position=position_jitter(w=0.3,h=0), size=3) +
-  scale_x_discrete(limits=c("CW","HD"))
+  scale_x_discrete(limits=c("C","H","D"))
 p
 
 
@@ -261,4 +261,11 @@ p <-ggplot(d, aes(x=treatment, y=count, shape=climate)) +
 p
 
 # Heatmap of top 20 genes sorted by pvalue
+install.packages("pheatmap")
+library(pheatmap)
+topgenes <- head(rownames(res_treatCD),20)
+mat <- assay(vsd)[topgenes,]
+mat <- mat - rowMeans(mat)
+df <- as.data.frame(colData(dds)[,c("treatment","climate")])
+pheatmap(mat, annotation_col=df)
 
