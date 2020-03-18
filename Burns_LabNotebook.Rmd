@@ -537,8 +537,11 @@ head(div)
 Entry 29: 2020-02-20, Thursday.
 Entry 30: 2020-02-21, Friday.
 Entry 31: 2020-02-24, Monday.
+
 Transcriptomics!!
+
 Workflow
+
 -Careful experimental design
 	considering questions/hypotheses (broad or a priori)
 	factors (populations, treatments, tissue, sex)
@@ -557,16 +560,49 @@ Workflow
 			which population was it in, what tissue, etc.
 				use to test for differences in expression
 					using ANOVA design, e.g.
-			looking at counts (proxy for expression magnitude): two conditions, multiple families (look at degree of 				expression (average across replicates) for a given gene)
+			looking at counts (proxy for expression magnitude): two conditions, multiple families (look at degree of expression (average across replicates) for a given gene)
 -integrate (with other data types (different genetic diversity statistics, SNPS, proteomics, environmental data))
 	functional enrichment, network analyses (all genes in regulatory network, with a particular function)
+	
 Entry 32: 2020-02-25, Tuesday.
+
+
 Entry 33: 2020-02-26, Wednesday.
+
+-only 3' RNA
+-took from two environments, hot/dry and cool/wet, then raised in common garden.
+-took cone tissue and ground up, extracted RNA
+
+Factors
+Treatments: C, H, D
+Source/climate: H/D, C/W
+Time: 0, 5, 10
+
+What questions can we ask with these data?
+1. Do individuals from difference climate sources have different gene expression in common environments?
+  -each condition
+  - exp ~ clim + trt
+2. Do indivduals from different source climates have different gene expression at different time points?
+  -an interaction between source climate and time
+  -exp ~ clim + time + clim*time + family (probably can't include? random effect)
+  -exp ~ clim + trt + clim*trt
+  
+1. Do family from different sources differ in gene expression?
+2. Transcriptome wide response to heat stress? Water stress?
+
+Population:
+LOL: C, D
+
 Entry 34: 2020-02-27, Thursday.
 Entry 35: 2020-02-28, Friday.
 Entry 36: 2020-03-02, Monday.
 Entry 37: 2020-03-03, Tuesday.
 Entry 38: 2020-03-04, Wednesday.
+
+mapped the population sequences to the reference transcriptome.
+
+
+
 Entry 39: 2020-03-05, Thursday.
 Entry 40: 2020-03-06, Friday.
 Entry 41: 2020-03-09, Monday.
