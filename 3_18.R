@@ -254,7 +254,7 @@ p <- p + geom_point(position=position_jitter(w=0.3,h=0), size=3) +
   scale_x_discrete(limits=c("C","H","D"))
 p
 
-
+#add in day somehow
 
 p <-ggplot(d, aes(x=treatment, y=count, shape=climate)) + 
   theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
@@ -269,3 +269,42 @@ mat <- mat - rowMeans(mat)
 df <- as.data.frame(colData(dds)[,c("treatment","climate")])
 pheatmap(mat, annotation_col=df)
 
+
+############ Try with only Day 10 data
+
+
+
+# grep("10", names(countsTableRound), value = TRUE)
+# day10countstable <- subset(countsTableRound, grep("10", names(countsTableRound), value = TRUE)) #doesn't work has to be logical
+
+
+
+day10countstable <- countsTableRound %>% select(contains("10"))
+dim(day10countstable)
+
+
+
+conds10<- subset(conds, day=="10")
+dim(conds10)
+head(conds10)
+
+
+############ Try with only Day 10 data
+
+
+
+# grep("10", names(countsTableRound), value = TRUE)
+# day10countstable <- subset(countsTableRound, grep("10", names(countsTableRound), value = TRUE)) #doesn't work has to be logical
+
+
+
+day10countstable <- countsTableRound %>% select(contains("10"))
+dim(day10countstable)
+
+
+
+conds10<- subset(conds, day=="10")
+dim(conds10)
+
+dds <- DESeqDataSetFromMatrix(countData = day10countstable, colData = conds10,
+                              design = ~ climate + treatment + climate:treatment)

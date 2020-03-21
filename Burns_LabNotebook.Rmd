@@ -568,7 +568,10 @@ Entry 32: 2020-02-25, Tuesday.
 
 
 Entry 33: 2020-02-26, Wednesday.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c182fb96c096f1cceae3882ee956a072731eb25
 -only 3' RNA
 -took from two environments, hot/dry and cool/wet, then raised in common garden.
 -took cone tissue and ground up, extracted RNA
