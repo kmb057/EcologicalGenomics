@@ -1,5 +1,5 @@
 ## Set your working directory
-setwd("~/github/2020_Ecological_Genomics")
+setwd("C:/Users/kmb057/Documents/GitHub/EcologicalGenomics")
 
 ## Import the libraries that we're likely to need in this session
 library(DESeq2)
@@ -12,7 +12,7 @@ library(wesanderson)
 library(vsn)  ### First: BiocManager::install("vsn") AND BiocManager::install("hexbin")
 
 ## Import the counts matrix
-countsTable <- read.table("RS_cds2kb_countsMatrix.txt", header=TRUE, row.names=1)
+countsTable <- read.table("C:/Users/kmb057/Documents/GitHub/EcologicalGenomics/RS_counts_samples/RS_cds2kb_countsMatrix.txt", header=TRUE, row.names=1)
 head(countsTable)
 dim(countsTable)
 countsTableRound <- round(countsTable) # Need to round because DESeq wants only integers
@@ -20,7 +20,7 @@ head(countsTableRound)
 
 ## Import the samples description table - links each sample to factors of the experimental design.
 # Need the colClasses otherwise imports "day" as numeric which DESeq doesn't like, coula altneratively change to d0, d5, d10
-conds <- read.delim("RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
+conds <- read.delim("C:/Users/kmb057/Documents/GitHub/EcologicalGenomics/RS_counts_samples/RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
 head(conds)
 dim(conds)
 
@@ -43,9 +43,9 @@ barplot(colSums(day10countstable), las=3, cex.names=0.5,names.arg = substring(co
 abline(h=mean(colSums(day10countstable)), col="blue", lwd =2)
 
 # What's the average number of counts per gene
-rowSums(countsTableRound)
-mean(rowSums(countsTableRound))
-median(rowSums(countsTableRound))
+rowSums(day10countstable)
+mean(rowSums(day10countstable))
+median(rowSums(day10countstable))
 # wow! This shows dispersion across genes - differences in magnitude of expression
 
 # What's the average number of counts per gene per sample
@@ -141,6 +141,50 @@ summary(res_interClimTreat)
 # outliers [1]       : 61, 0.26%
 # low counts [2]     : 7367, 31%
 
+
+
+
+# MA plot
+plotMA(res_interClimTreat,ylim=c(-10,10))
+
+# PCA
+vsd <- vst(dds, blind=FALSE)
+
+data <- plotPCA(vsd,intgroup=c("climate","treatment","pop"),returnData=TRUE)
+percentVar <- round(100 * attr(data, "percentVar"))
+
+data$treatment <- factor(data$treatment, levels=c("C","H","D"), labels = c("C","H","D"))
+data$day <- factor(data$day, levels=c("0","5","10"), labels = c("0","5","10"))
+
+
+ggplot(data, aes(PC1, PC2, color=pop, shape=climate)) +
+  geom_point(size=4, alpha=0.85) +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+  theme_minimal()
+
+# Counts of specific top gene! (important validatition that the normalization, model is working)
+d <-plotCounts(dds, gene="MA_7017g0010", intgroup = (c("treatment","climate","day")), returnData=TRUE)
+d
+
+p <-ggplot(d, aes(x=treatment, y=count, color=climate)) + 
+  theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
+p <- p + geom_point(position=position_jitter(w=0.3,h=0), size=3) +
+  scale_x_discrete(limits=c("C","H","D"))
+p
+
+p <-ggplot(d, aes(x=treatment, y=count, color=climate)) + 
+  theme_minimal() + theme(text = element_text(size=20), panel.grid.major=element_line(colour="grey"))
+p
+
+# Heatmap of top 20 genes sorted by pvalue
+
+library(pheatmap)
+topgenes <- head(rownames(res_treatCD),20)
+mat <- assay(vsd)[topgenes,]
+mat <- mat - rowMeans(mat)
+df <- as.data.frame(colData(dds)[,c("treatment","climate","day")])
+pheatmap(mat, annotation_col=df)
 
 
 

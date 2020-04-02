@@ -12,7 +12,7 @@ library(wesanderson)
 library(vsn)  ### First: BiocManager::install("vsn") AND BiocManager::install("hexbin")
 
 ## Import the counts matrix
-countsTable <- read.table("RS_cds2kb_countsMatrix.txt", header=TRUE, row.names=1)
+countsTable <- read.table("C:/Users/kmb057/Documents/GitHub/EcologicalGenomics/RS_counts_samples/RS_cds2kb_countsMatrix.txt", header=TRUE, row.names=1)
 head(countsTable)
 dim(countsTable)
 countsTableRound <- round(countsTable) # Need to round because DESeq wants only integers
@@ -20,7 +20,7 @@ head(countsTableRound)
 
 ## Import the samples description table - links each sample to factors of the experimental design.
 # Need the colClasses otherwise imports "day" as numeric which DESeq doesn't like, coula altneratively change to d0, d5, d10
-conds <- read.delim("RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
+conds <- read.delim("C:/Users/kmb057/Documents/GitHub/EcologicalGenomics/RS_counts_samples/RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
 head(conds)
 dim(conds)
 
